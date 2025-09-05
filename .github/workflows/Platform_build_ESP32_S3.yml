@@ -104,7 +104,7 @@ jobs:
     needs: [bootstrap]
     strategy:
       matrix:
-        node: [I2S-4MFlash, SqueezeAmp, Muse]
+        node: [ESP32S3]
         depth: [16]
         exclude:
           - node: Muse
