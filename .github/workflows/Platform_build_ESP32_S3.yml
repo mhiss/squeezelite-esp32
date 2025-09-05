@@ -45,7 +45,7 @@ jobs:
         echo "release_build_option=$release_build_option" >> "$GITHUB_OUTPUT"
         echo "Dumping environment"
         env
-        . /opt/esp/python_env/idf4.3_py3.8_env/bin/activate
+        . /opt/esp/python_env/idf4.4_py3.8_env/bin/activate
         # build_flags support the following options
         # --mock - to mock the compilation part - this is to be used for testing only
         # --force - to force a release build even if the last commit message doesn't contain the word "release"
@@ -105,7 +105,7 @@ jobs:
     strategy:
       matrix:
         node: [I2S-4MFlash, SqueezeAmp, Muse]
-        depth: [16, 32]
+        depth: [16]
         exclude:
           - node: Muse
             depth: 32      
@@ -125,7 +125,7 @@ jobs:
           echo Environment File name: $GITHUB_ENV        
     - name: Set build parameters
       run: |
-        . /opt/esp/python_env/idf4.3_py3.8_env/bin/activate
+        . /opt/esp/python_env/idf4.4_py3.8_env/bin/activate
         git config --global --add safe.directory /__w/squeezelite-esp32/squeezelite-esp32   
         git status
         build_tools.py environment --build ${{ needs.bootstrap.outputs.build_number }} --env_file "$GITHUB_ENV" --node "${{matrix.node}}" --depth ${{matrix.depth}} --major 2 --docker sle118/squeezelite-esp32-idfv435 
