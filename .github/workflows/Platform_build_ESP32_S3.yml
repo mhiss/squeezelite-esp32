@@ -1,4 +1,4 @@
-name: Platform Build
+name: Platform Build ESP32-S3
 on: 
   push:
     branches: 
