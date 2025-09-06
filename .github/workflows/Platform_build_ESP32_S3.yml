@@ -18,7 +18,7 @@ jobs:
     name: Global setup
     runs-on: ubuntu-latest
     container:
-      image: sle118/squeezelite-esp32-idfv446
+      image: espressif/idf
     outputs:
       build_number: ${{ steps.buildnumber.outputs.build_number }}
       ui_build: ${{ steps.build_flags.outputs.ui_build }}
@@ -100,7 +100,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: sle118/squeezelite-esp32-idfv446
+      image: espressif/idf
     needs: [bootstrap]
     strategy:
       matrix:
@@ -116,11 +116,6 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
-    - name: Install Cmake
-      run: |
-        apt-get -y update
-        apt-get -y upgrade
-        apt-get -y install cmake    
     - name: Show Build Flags        
       run: |
           echo "Running with the following options" 
@@ -133,7 +128,7 @@ jobs:
         . /opt/esp/python_env/idf4.4_py3.8_env/bin/activate
         git config --global --add safe.directory /__w/squeezelite-esp32/squeezelite-esp32   
         git status
-        build_tools.py environment --build ${{ needs.bootstrap.outputs.build_number }} --env_file "$GITHUB_ENV" --node "${{matrix.node}}" --depth ${{matrix.depth}} --major 2 --docker sle118/squeezelite-esp32-idfv446 
+        build_tools.py environment --build ${{ needs.bootstrap.outputs.build_number }} --env_file "$GITHUB_ENV" --node "${{matrix.node}}" --depth ${{matrix.depth}} --major 2 --docker espressif/idf 
         
     - uses: actions/download-artifact@v4
       name: Restore common objects
