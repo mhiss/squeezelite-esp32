@@ -64,7 +64,7 @@ jobs:
         cd server_certs;./getcert.sh;cat github.pem;cd ..      
     - name: Install Cmake
       run: |
-        apt-get install cmake
+        apt-get -y install cmake
     - name: Setup Node.js dependencies
       if: ${{ !env.ACT }}
       uses: actions/setup-node@v3
