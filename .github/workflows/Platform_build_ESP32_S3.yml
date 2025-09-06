@@ -61,7 +61,10 @@ jobs:
       if: ${{ steps.build_flags.outputs.release_flag }}
       run: |
         git update-index --chmod=+x ./server_certs/getcert.sh
-        cd server_certs;./getcert.sh;cat github.pem;cd ..        
+        cd server_certs;./getcert.sh;cat github.pem;cd ..      
+    - name: Install Cmake
+      run: |
+        apt-get install cmake
     - name: Setup Node.js dependencies
       if: ${{ !env.ACT }}
       uses: actions/setup-node@v3
