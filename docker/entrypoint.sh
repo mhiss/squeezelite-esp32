@@ -10,4 +10,5 @@ echo ""
 echo "To run size statistics, run:"
 echo "puncover/runner.py --gcc_tools_base $GCC_TOOLS_BASE --elf ./build/recovery.elf --build_dir build --src_root ."
 echo "" 
+exec apt install cmake
 exec "$@"
