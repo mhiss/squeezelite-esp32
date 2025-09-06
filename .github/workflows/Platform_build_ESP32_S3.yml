@@ -62,11 +62,6 @@ jobs:
       run: |
         git update-index --chmod=+x ./server_certs/getcert.sh
         cd server_certs;./getcert.sh;cat github.pem;cd ..      
-    - name: Install Cmake
-      run: |
-        apt-get -y update
-        apt-get -y upgrade
-        apt-get -y install cmake
     - name: Setup Node.js dependencies
       if: ${{ !env.ACT }}
       uses: actions/setup-node@v3
@@ -121,6 +116,11 @@ jobs:
       with:
         fetch-depth: 0
         submodules: true
+    - name: Install Cmake
+      run: |
+        apt-get -y update
+        apt-get -y upgrade
+        apt-get -y install cmake    
     - name: Show Build Flags        
       run: |
           echo "Running with the following options" 
